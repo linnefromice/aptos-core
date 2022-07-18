@@ -35,7 +35,12 @@ fn handle_panic(panic_info: &PanicInfo<'_>) {
     let backtrace = format!("{:#?}", Backtrace::new());
 
     let info = CrashInfo { details, backtrace };
-    error!("{}", crash_info = toml::to_string_pretty(&info).unwrap());
+    let crash_info = toml::to_string_pretty(&info).unwrap();
+    error!("{}", crash_info);
+
+    println!("crashing now...");
+    println!("{}", crash_info);
+    println!("crashing step2");
 
     // Wait till the logs have been flushed
     aptos_logger::flush();
